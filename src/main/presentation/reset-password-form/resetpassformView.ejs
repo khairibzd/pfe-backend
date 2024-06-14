@@ -1,0 +1,129 @@
+<style>
+  body {
+    font-family: 'Lato', sans-serif;
+    margin: 0 auto;
+    padding: 80px 0; /* Increased top and bottom padding for better balance */
+    background-color: #ffffff;
+  }
+
+  .form {
+    --input-focus: #2d8cf0;  /* Focus color for inputs */
+    --font-color: #323232;  /* Text color */
+    --font-color-sub: #888; /* Subdued text color */
+    --bg-color: #f6f5f5e3;      /* Background color for elements */
+    --main-color: #3498db; /* Main brand color */
+    padding: 30px;  /* Reduced form padding for a more concise feel */
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Center form content horizontally */
+    gap: 20px;
+    border-radius: 5px;
+    border: 1px solid rgba(var(--main-color), 0.2); /* Subtle border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow */
+    margin: 0 auto;  /* Center form horizontally within viewport */
+    max-width: 400px;  /* Set a maximum width for responsiveness */
+  }
+
+  .title {
+    color: var(--font-color);
+    font-weight: 900;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+
+  .title span {
+    color: var(--font-color-sub);
+    font-weight: 600;
+    font-size: 16px;  /* Slightly smaller font size for subtitle */
+  }
+
+  .input {
+    width: 100%;  /* Adjust width to fill available space */
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid rgba(var(--main-color), 0.2); /* Subtle border */
+    background-color: var(--bg-color);
+    box-shadow: none; /* Removed box-shadow for cleaner look */
+    font-size: 16px;  /* Increased input font size for better readability */
+    font-weight: 600;
+    color: var(--font-color);
+    padding: 10px;  /* Adjusted padding for a more balanced look */
+    outline: none;
+  }
+
+  .input::placeholder {
+    color: var(--font-color-sub);
+    opacity: 0.8;
+  }
+
+  .input:focus {
+    border: 1px solid var(--input-focus); /* Focus highlight */
+  }
+
+  .login-with {
+    display: flex;
+    gap: 20px;
+  }
+
+  .button-confirm {
+    cursor: pointer;
+    width: 120px; /* Adjusted width for better fit */
+    height: 40px;
+    border-radius: 5px;
+    border: none; /* Removed border for cleaner button design */
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 0 15px; /* Adjusted padding for better text placement */
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out; /* Smooth hover effect */
+  }
+
+  .button-confirm:hover {
+    background-color: #2980b9; /* Darker shade on hover */
+  }
+
+  .button-confirm:active {
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2); /* Slight press effect */
+    transform: translateY(1px); /* Subtle movement on press */
+  }
+</style>
+<body>
+    <form id="passwordForm"   class="form" action="<%= process.env.BASE_URL %>/api/newPassword?token=<%= token %>" method="POST">
+    <div class="title">Welcome,<br><span>reset password to continue</span></div>
+    <input type="password" required placeholder="Password" name="password" id="passwordInput" class="input">
+    <input type="password" required placeholder="Repeat Password" name="confirmPasswordInput" id="confirmPasswordInput" class="input">
+    <button class="button-confirm">Let's go →</button>
+  </form>
+
+  <script>
+    const passwordForm = document.getElementById('passwordForm');
+    passwordForm.addEventListener('submit', (event) => {
+      const password = document.getElementById('passwordInput').value;
+      const confirmPassword = document.getElementById('confirmPasswordInput').value;
+
+ 
+      if (password === '' || confirmPassword === '') {
+        alert('Please fill in both password fields');
+        event.preventDefault();
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        event.preventDefault();
+        return;
+      }
+
+
+    });
+</script>
+</body>
+
+
+
